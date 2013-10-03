@@ -1,0 +1,40 @@
+﻿<Window x:Class="Kadaster.MainWindow"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid x:Name="LayoutRoot" Background="White" >
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <LinearGradientBrush x:Key="PanelGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="176" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF145787" Offset="0.16"/>
+                <GradientStop Color="#FF3D7FAC" Offset="0.502"/>
+                <GradientStop Color="#FF88C5EF" Offset="0.984"/>
+            </LinearGradientBrush>
+        </Grid.Resources>
+
+        <esri:Map x:Name="_map" WrapAround="True" Background="#FFE3E3E3" ExtentChanged="_map_ExtentChanged" Extent="131992.79142096,397864.761011781,132183.291801961,397981.531382847">
+            <esri:ArcGISTiledMapServiceLayer ID="StreetMapLayer"
+                    Url="http://services.arcgisonline.nl/arcgis/rest/services/Basiskaarten/Topo/MapServer"/>
+        </esri:Map>
+        <Border Background="{StaticResource PanelGradient}" BorderThickness="1" CornerRadius="5"
+            HorizontalAlignment="Right"  VerticalAlignment="Top"
+            Margin="20" Padding="5" BorderBrush="Black" >
+            <esri:Legend Map="{Binding ElementName=_map}" 
+                         LayerIDs="BAG"
+                         LayerItemsMode="Tree" />
+
+        </Border>
+
+    </Grid>
+</Window>
+
+
